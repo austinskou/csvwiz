@@ -102,6 +102,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_head.add_argument("--n", type=int, default=10, metavar="N",
                         help="Number of rows to show (default: 10).")
 
+    p_head.add_argument(
+    "--delimiter",
+    metavar="DELIM",
+    default=",",
+    help="Delimiter character (default: comma)."
+    )
+
     return parser
 
 
@@ -110,13 +117,16 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        headers, rows = ops.read_csv(args.file)
+    headers, rows = ops.read_csv(
+        args.file,
+        delimiter=getattr(args, "delimiter", ",")
+    )
     except FileNotFoundError:
-        fmt.print_error(f"File not found: {args.file}")
-        sys.exit(1)
+    fmt.print_error(f"File not found: {args.file}")
+    sys.exit(1)
     except Exception as e:
-        fmt.print_error(f"Could not read file: {e}")
-        sys.exit(1)
+    fmt.print_error(f"Could not read file: {e}")
+    sys.exit(1)
 
     try:
         match args.command:

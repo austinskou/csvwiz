@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "csvwiz"
+version = "0.1.0"
+description = "Transform, filter, and summarize CSV files from the command line."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["csv", "cli", "data", "transform", "filter"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+csvwiz = "csvwiz.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["csvwiz*"]
